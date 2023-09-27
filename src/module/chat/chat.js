@@ -24,9 +24,10 @@ export default {
     });
 
     if (newChat)
-      res.status(200).json({
+      res.status(201).json({
         status: 201,
         message: "Chat successfully created",
+        data: newChat,
       });
   },
 };

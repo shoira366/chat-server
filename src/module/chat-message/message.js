@@ -1,7 +1,5 @@
 import { Exception } from "../../exception/exception.js";
 import { getMessage, postMessage } from "./model.js";
-import { get_by_id } from "../user/model.js";
-import { getchat_by_id } from "../chat/model.js";
 
 export default {
   GET: async (req, res, next) => {
@@ -20,9 +18,10 @@ export default {
     );
 
     if (newMessage)
-      res.status(200).json({
+      res.status(201).json({
         status: 201,
         message: "Message successfully created",
+        data: newMessage,
       });
   },
 };

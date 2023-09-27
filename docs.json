@@ -1,0 +1,242 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Task API",
+    "version": "1.0.0",
+    "description": "An API for user chatting.",
+    "servers": [
+      {
+        "url": "http://localhost:9000"
+      }
+    ]
+  },
+  "paths": {
+    "/users/add": {
+      "post": {
+        "summary": "Create a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "uuid",
+                      "example": "ae4eb416-ded7-4341-be27-156ca19792e5"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chats/add": {
+      "post": {
+        "summary": "Create a new chat",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "users": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": ["username"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Chat successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "uuid",
+                      "example": "ae4eb416-ded7-4341-be27-156ca19792e5"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chats/get": {
+      "post": {
+        "summary": "Get chats by user_id",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "uuid"
+                  }
+                },
+                "required": ["user"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "List of chats for that given user_id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "uuid",
+                      "example": "ae4eb416-ded7-4341-be27-156ca19792e5"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "chat_1"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2023-09-27 14:00:50.958654+00"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/add": {
+      "post": {
+        "summary": "Create a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "chat": {
+                    "type": "uuid"
+                  },
+                  "author": {
+                    "type": "uuid"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": ["chat", "author"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Message successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "uuid",
+                      "example": "ae4eb416-ded7-4341-be27-156ca19792e5"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/get": {
+      "post": {
+        "summary": "Get messages by chat_id",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "chat": {
+                    "type": "uuid"
+                  }
+                },
+                "required": ["chat"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "List of messages for that given chat_id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "properties": {
+                    "id": {
+                      "type": "uuid",
+                      "example": "ae4eb416-ded7-4341-be27-156ca19792e5"
+                    },
+                    "text": {
+                      "type": "string",
+                      "example": "Hello"
+                    },
+                    "author_username": {
+                      "type": "string",
+                      "example": "John Doe"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2023-09-27 14:00:50.958654+00"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
